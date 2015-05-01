@@ -31,3 +31,8 @@ main
 
 # Debug files
 *.dSYM/
+
+*.txt
+*.swp
+*.old
+*.bak
