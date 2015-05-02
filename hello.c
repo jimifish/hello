@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <math.h>
+#include <sys/time.h>
 #include "PSToDCM.h"
 #include "jimmy_debug.h"
 
@@ -99,5 +100,15 @@ int main(void)
 
 	u8 u8ChannelID = 1;
 	jimmy_debug(LOG_DEBUG, "%d.\n", u8ChannelID << 2);
+
+	struct timeval tv;
+	struct timezone tz;
+	gettimeofday(&tv, &tz);
+	jimmy_debug(LOG_DEBUG, "tv_sec:%d|tv_usec:%d|tz_minuteswest:%d|tz_dsttime:%d.\n",
+				tv.tv_sec,
+				tv.tv_usec,
+				tz.tz_minuteswest,
+				tz.tz_dsttime);
+	
 }
 
