@@ -22,6 +22,7 @@ void jimmy_debug(LOG_LEVEL lvl, char *fmt, ...)
     char* pos;
     int sz; 
     time_t t;
+	struct tm* tm;
    
 	switch(lvl)
 	{
@@ -37,12 +38,18 @@ void jimmy_debug(LOG_LEVEL lvl, char *fmt, ...)
 	}
 
     /* timestamp */
-    t = time(NULL);
-    pos = ctime(&t);
-    sz = strlen(pos);
-    pos[sz-1] = ' ';
-   
-	snprintf(stamp, LOG_TIMESTAMP_SIZE, "%s", pos);   	
+//    t = time(NULL);
+//    pos = ctime(&t);
+//    sz = strlen(pos);
+//    pos[sz-1] = ' ';
+//   
+//	snprintf(stamp, LOG_TIMESTAMP_SIZE, "%s", pos);   	
+
+	char mem[LOG_TIMESTAMP_SIZE];
+	t = time(NULL);
+	tm = localtime(&t);
+	strftime(mem, sizeof(mem), "%F %X", tm);
+	snprintf(stamp, LOG_TIMESTAMP_SIZE, "%s", mem);
 
     FILE *fd, *fd1;
     va_start(args, fmt);
